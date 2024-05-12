@@ -1,0 +1,152 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/IndexStyle.css">
+    <link rel="stylesheet" href="../Css/Projets.css">
+    <title>My Project</title>
+</head>
+<body>
+    <header>
+        <div class="main_title">
+            <img src="../Images/bitmoji.png" height="110" alt="my_caricature ">
+            <div>
+            <h1>Brouwers Léa</h1>
+            <h2>My Project</h2>
+            </div>
+        </div>
+        <nav class="navigation_menu">
+            <ul>
+                <li><a href="../Index.html">But de l’unité programmation</a></li>
+                <li class="deroulement"><a href="./HauteEcoleCondorcet.html">Haute Ecole Condorcet</a>
+                    <div class="onglets">
+                        <a href="./HauteEcoleCondorcet.html#HepCond">Heph Condorcet</a>
+                        <a href="./HauteEcoleCondorcet.html#SecEbus">Section e-business</a>
+                    </div>
+                </li>
+                <li class="deroulement"><a href="#">Calculs et affectations</a>
+                    <div class="onglets">
+                        <a href="./Rectangle.html">Rectangle</a>
+                        <a href="./Tva.html">TVA</a>
+                    </div>
+                </li>
+                <li class="deroulement"><a href="./StructuresConditionnelles.html">Structures conditionnelles</a>
+                    <div class="onglets">
+                        <a href="./StructuresConditionnelles.html#"Cerc>Cercle</a>
+                        <a href="./StructuresConditionnelles.html#FonctQuad">Fonction quadratique</a>
+                        <a href="./StructuresConditionnelles.html#Calc">Calculette</a>
+                        <a href="./StructuresConditionnelles.html#Civi">Civilité</a>
+                        <a href="./StructuresConditionnelles.html#DaLong">Date Longue</a>
+                    </div>
+                </li>
+                <li><a href="./StructuresRépétitivesEtFonctions.html">Structures répétitives et fonctions</a></li>
+                <li><a href="./Tableaux.html">Tableaux</a></li>
+                <li class="deroulement"><a href="#">Fin d’apprentissage </a>
+                    <div class="onglets">
+                        <a href="#Tr">Tris</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section id="Tr">
+        <script>
+            function triParInsertion(arr) {
+                for (let i = 1; i < arr.length; i++) {
+                    let cle = arr[i];
+                    let j = i - 1;
+                    while (j >= 0 && arr[j] > cle) {
+                        arr[j + 1] = arr[j];
+                        j--;
+                    }
+                    arr[j + 1] = cle;
+                }
+                return arr;
+            }
+            function triABulles(arr) {
+                let n = arr.length;
+                for (let i = 0; i < n - 1; i++) {
+                    for (let j = 0; j < n - i - 1; j++) {
+                        if (arr[j] > arr[j + 1]) {
+                            let temp = arr[j];
+                            arr[j] = arr[j + 1];
+                            arr[j + 1] = temp;
+                        }
+                    }
+                }
+                return arr;
+            }
+            function triParSelection(arr) {
+                let n = arr.length;
+                for (let i = 0; i < n - 1; i++) {
+                    let min = i;
+                    for (let j = i + 1; j < n; j++) {
+                        if (arr[j] < arr[min]) {
+                            min = j;
+                        }
+                    }
+                    if (min !== i) {
+                        let temp = arr[i];
+                        arr[i] = arr[min];
+                        arr[min] = temp;
+                    }
+                }
+                return arr;
+            }
+            // Ajouter le résultat du tri dans une balise HTML
+            function afficherTri(arr) {
+                // Supprimer le résultat précédent
+                let result = document.querySelector('p');
+                if (result) {
+                    result.remove();
+                }
+                // Créer un nouveau paragraphe pour afficher le résultat
+                result = document.createElement('p');
+                result.textContent = arr.join(', ');
+                document.body.appendChild(result);
+            }
+        </script>
+        <h1>Projet Tris</h1>
+        <p>ENONCÉ : Intégrer la méthode de tri que vous avez tirée au sort dans le projet JS réalisé dans le cadre de l’activité d’apprentissage. </p>
+        <p>ANALYSE : <br>
+            1.	LIRE ARR,TRI <br>
+            2.	CALCULER TRI <br>
+            3.	ECRIRE TRI(RESULT)
+            </p>
+        <form class="formulaire">
+            <label for="arr">Entrez des nombres séparés par des virgules pour les trier :</label>
+            <input type="text" id="arr" name="arr" required>
+            <br>
+            <input type="radio" id="triInsertion" name="tri" value="triInsertion" checked>
+            <label for="triInsertion">Tri par insertion</label>
+            <input type="radio" id="triBulles" name="tri" value="triBulles">
+            <label for="triBulles">Tri à bulles</label>
+            <input type="radio" id="triSelection" name="tri" value="triSelection">
+            <label for="triSelection">Tri par sélection</label>
+            <button type="submit">Trier</button>
+        </form>
+        <script>
+            document.querySelector('form').addEventListener('submit', e => {
+                e.preventDefault();
+                let arr = document.querySelector('#arr').value.split(',').map(Number);
+                let tri = document.querySelector('input[name="tri"]:checked').value;
+                let result;
+                switch (tri) {
+                    case 'triInsertion':
+                        result = triParInsertion(arr);
+                        break;
+                    case 'triBulles':
+                        alert('Tri à bulles en cours de développement')
+                        break;
+                    case 'triSelection':
+                        result = triParSelection(arr);
+                        break;
+                    default:
+                        break;
+                }
+                afficherTri(result);
+            });
+        </script>
+    </section>
+</body>
+</html>
